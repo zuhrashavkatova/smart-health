@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block body_class %}predict_history{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 30px;">🕓 Bashoratlar Tarixi</h2>
+
+{% if history %}
+  {% for prediction_type, records in grouped_history.items %}
+    <h3 style="margin-top: 30px; color: #333;">{{ prediction_type|capfirst }} Bashoratlari</h3>
+    <div style="overflow-x:auto; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: #f9f9f9;">
+      <table style="width: 100%; border-collapse: collapse; min-width: 1000px; font-family: Arial, sans-serif;">
+        <thead style="background-color: #4CAF50; color: white; font-weight: bold;">
+          <tr>
+            <th style="padding: 12px; border: 1px solid #ddd;">Sana</th>
+            <th style="padding: 12px; border: 1px solid #ddd;">Natija</th>
+            {% if prediction_type == 'diabetes' %}
+              <th>Pregnancies</th>
+              <th>Glucose</th>
+              <th>Blood Pressure</th>
+              <th>Skin Thickness</th>
+              <th>Insulin</th>
+              <th>BMI</th>
+              <th>Pedigree</th>
+              <th>Age</th>
+            {% elif prediction_type == 'heart' %}
+              <th>Age</th>
+              <th>Sex</th>
+              <th>Chest Pain</th>
+              <th>BP</th>
+              <th>Cholesterol</th>
+              <th>FBS</th>
+              <th>Rest ECG</th>
+              <th>Max HR</th>
+              <th>Exercise Angina</th>
+              <th>Oldpeak</th>
+              <th>Slope</th>
+              <th>CA</th>
+              <th>Thal</th>
+            {% elif prediction_type == 'kidney' %}
+              <th>Age</th>
+              <th>BP</th>
+              <th>SG</th>
+              <th>AL</th>
+              <th>SU</th>
+              <th>BGR</th>
+              <th>BU</th>
+              <th>SC</th>
+              <th>SOD</th>
+              <th>POT</th>
+              <th>HEMO</th>
+              <th>PCV</th>
+              <th>WC</th>
+              <th>RC</th>
+            {% elif prediction_type == 'liver' %}
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Total Bilirubin</th>
+              <th>Direct Bilirubin</th>
+              <th>Alkaline Phosphotase</th>
+              <th>Alamine Aminotransferase</th>
+              <th>Aspartate Aminotransferase</th>
+              <th>Total Proteins</th>
+              <th>Albumin</th>
+              <th>A/G Ratio</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+            <tr style="text-align: center; border: 1px solid #ddd;">
+              <td style="padding: 8px; border: 1px solid #ddd;">{{ record.created_at|date:"Y-m-d H:i" }}</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">{{ record.result }}</td>
+              {% if prediction_type == 'diabetes' %}
+                <td>{{ record.Pregnancies|default:"-" }}</td>
+                <td>{{ record.Glucose|default:"-" }}</td>
+                <td>{{ record.BloodPressure|default:"-" }}</td>
+                <td>{{ record.SkinThickness|default:"-" }}</td>
+                <td>{{ record.Insulin|default:"-" }}</td>
+                <td>{{ record.BMI|default:"-" }}</td>
+                <td>{{ record.DiabetesPedigreeFunction|default:"-" }}</td>
+                <td>{{ record.DiabetesAge|default:"-" }}</td>
+              {% elif prediction_type == 'heart' %}
+                <td>{{ record.heart_age|default:"-" }}</td>
+                <td>{{ record.sex|default:"-" }}</td>
+                <td>{{ record.cp|default:"-" }}</td>
+                <td>{{ record.trestbps|default:"-" }}</td>
+                <td>{{ record.chol|default:"-" }}</td>
+                <td>{{ record.fbs|default:"-" }}</td>
+                <td>{{ record.restecg|default:"-" }}</td>
+                <td>{{ record.thalach|default:"-" }}</td>
+                <td>{{ record.exang|default:"-" }}</td>
+                <td>{{ record.oldpeak|default:"-" }}</td>
+                <td>{{ record.slope|default:"-" }}</td>
+                <td>{{ record.ca|default:"-" }}</td>
+                <td>{{ record.thal|default:"-" }}</td>
+              {% elif prediction_type == 'kidney' %}
+                <td>{{ record.kidney_age|default:"-" }}</td>
+                <td>{{ record.bp|default:"-" }}</td>
+                <td>{{ record.sg|default:"-" }}</td>
+                <td>{{ record.al|default:"-" }}</td>
+                <td>{{ record.su|default:"-" }}</td>
+                <td>{{ record.bgr|default:"-" }}</td>
+                <td>{{ record.bu|default:"-" }}</td>
+                <td>{{ record.sc|default:"-" }}</td>
+                <td>{{ record.sod|default:"-" }}</td>
+                <td>{{ record.pot|default:"-" }}</td>
+                <td>{{ record.hemo|default:"-" }}</td>
+                <td>{{ record.pcv|default:"-" }}</td>
+                <td>{{ record.wc|default:"-" }}</td>
+                <td>{{ record.rc|default:"-" }}</td>
+              {% elif prediction_type == 'liver' %}
+                <td>{{ record.liver_Age|default:"-" }}</td>
+                <td>{{ record.Gender|default:"-" }}</td>
+                <td>{{ record.Total_Bilirubin|default:"-" }}</td>
+                <td>{{ record.Direct_Bilirubin|default:"-" }}</td>
+                <td>{{ record.Alkaline_Phosphotase|default:"-" }}</td>
+                <td>{{ record.Alamine_Aminotransferase|default:"-" }}</td>
+                <td>{{ record.Aspartate_Aminotransferase|default:"-" }}</td>
+                <td>{{ record.Total_Proteins|default:"-" }}</td>
+                <td>{{ record.Albumin|default:"-" }}</td>
+                <td>{{ record.Albumin_and_Globulin_Ratio|default:"-" }}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+{% else %}
+<p>Oldingi bashoratlar mavjud emas.</p>
+{% endif %}
+
+<div style="margin-top: 25px;">
+  <a href="{% url 'index' %}" style="
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+  "
+  onmouseover="this.style.backgroundColor='#45a049';"
+  onmouseout="this.style.backgroundColor='#4CAF50';"
+  >
+    Bosh sahifaga qaytish
+  </a>
+</div>
+{% endblock %}

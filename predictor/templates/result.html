@@ -1,0 +1,22 @@
+
+
+{% extends 'base.html' %}
+{% block body_class %}predict_result{% endblock %}
+
+{% block content %}
+  <h2>{{ title }}</h2>
+  <form method="post" class="predict-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if result %}
+    <div class="result-box {% if 'bor' in result %}red{% else %}green{% endif %}">
+      <h3>Natija: {{ result }}</h3>
+    </div>
+  {% endif %}
+
+  <a class="btn-back" href="{% url 'index' %}">Back to Home</a>
+  <a class="btn-history" href="{% url 'history' %}">View Prediction History</a>
+{% endblock %}

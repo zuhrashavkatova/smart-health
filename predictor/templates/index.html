@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block body_class %}predict_diabetes{% endblock %}
+
+{% block content %}
+  <section class="disease-selection">
+    <h2>Select a Disease to Predict</h2>
+    <ul class="disease-list">
+      <li class="diabetes"><a href="{% url 'predict_diabetes' %}">🩸 Diabetes Prediction</a></li>
+      <li class="heart"><a href="{% url 'predict_heart' %}">❤️ Heart Disease Prediction</a></li>
+      <li class="kidney"><a href="{% url 'predict_kidney' %}">🧪 Kidney Disease Prediction</a></li>
+      <li class="liver"><a href="{% url 'predict_liver' %}">🧬 Liver Disease Prediction</a></li>
+    </ul>
+  </section>
+{% endblock %}
+
+
+
+
+

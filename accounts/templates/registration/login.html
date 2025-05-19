@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    background-color: #f5f5f5;
+  }
+
+  .login-register-box {
+    width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .login-register-box form p {
+    margin-bottom: 15px;
+  }
+
+  .login-register-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .login-register-box button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .login-register-box button:hover {
+    background-color: #0056b3;
+  }
+
+  .login-register-box p {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .login-register-box a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .login-register-box a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="login-register-box">
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+{% endblock %}

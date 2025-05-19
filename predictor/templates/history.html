@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">🩺 Prediction History</h2>
+
+  {% if history %}
+    {% for prediction_type, records in history.items %}
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">{{ prediction_type|title }} Predictions</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">📅 Date</th>
+                  <th scope="col">🔍 Result</th>
+                  <th scope="col">👤 age</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for record in records %}
+                  <tr>
+                    <td>{{ record.date|date:"Y-m-d H:i" }}</td>
+                    <td>{{ record.result }}</td>
+                    <td>{{ record.input_data.age|default:"Noma’lum" }} yosh</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info text-center" role="alert">
+      Sizda hali hech qanday bashoratlar yo‘q.
+    </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="{% url 'index' %}" class="btn btn-success btn-lg">
+      ⬅️ Bosh sahifaga qaytish
+    </a>
+  </div>
+</div>
+{% endblock %}
