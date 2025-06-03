@@ -8,7 +8,284 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<!--     <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
+  <style>
+        /* Paste your entire CSS code here */
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+          background: #f9f9f9;
+          color: #222;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .container {
+          width: 90%;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 20px 0;
+        }
+
+        /* Header */
+
+        header {
+          background-color: #111;
+          padding: 15px 0;
+        }
+
+        .header-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: white;
+        }
+
+        header h1 a {
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 1.8rem;
+        }
+
+        nav a {
+          margin-left: 20px;
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+          color: #ff69b4; /* pink */
+        }
+
+        /* Footer */
+
+        footer {
+          background-color: #111;
+          color: #aaa;
+          padding: 15px 0;
+          text-align: center;
+          margin-top: auto;
+        }
+
+        /* Disease Selection on index.html */
+
+        .disease-selection h2 {
+          text-align: center;
+          margin-bottom: 30px;
+          color: #111;
+        }
+
+        .disease-list {
+          list-style: none;
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        .disease-list li {
+          flex: 1 1 40%;
+          max-width: 300px;
+          border-radius: 12px;
+          padding: 25px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          color: white;
+        }
+
+        .disease-list li a {
+          color: inherit;
+          text-decoration: none;
+          display: block;
+        }
+
+        /* Colors by disease */
+        .disease-list li.diabetes {
+          background: linear-gradient(135deg, #ff69b4, #ff85c1); /* pink */
+          box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
+        }
+        .disease-list li.heart {
+          background: linear-gradient(135deg, #1e90ff, #4aa3ff); /* blue */
+          box-shadow: 0 8px 20px rgba(30, 144, 255, 0.5);
+        }
+        .disease-list li.kidney {
+          background: linear-gradient(135deg, #000000, #434343); /* black */
+          box-shadow: 0 8px 20px rgba(67, 67, 67, 0.7);
+        }
+        .disease-list li.liver {
+          background: linear-gradient(135deg, #f9f9f9, #e0e0e0); /* white/light gray */
+          color: #333;
+          box-shadow: 0 8px 20px rgba(220, 220, 220, 0.7);
+        }
+
+        .disease-list li:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form on result.html */
+
+        .predict-form input,
+        .predict-form select,
+        .predict-form textarea,
+        .predict-form button {
+          display: block;
+          width: 100%;
+          margin: 15px 0;
+          padding: 12px 15px;
+          font-size: 1rem;
+          border-radius: 8px;
+          border: 1.5px solid #ccc;
+          transition: border-color 0.3s ease;
+        }
+
+        .predict-form input:focus,
+        .predict-form select:focus,
+        .predict-form textarea:focus {
+          outline: none;
+          border-color: #ff69b4; /* pink highlight */
+        }
+
+        .predict-form button {
+          background-color: #ff69b4;
+          border: none;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .predict-form button:hover {
+          background-color: #e057a0;
+        }
+
+        /* Result styling */
+
+        .result-box {
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 12px;
+          font-size: 1.4rem;
+          font-weight: 700;
+          text-align: center;
+          color: white;
+        }
+
+        .result-box.red {
+          background-color: #dc3545; /* Bootstrap danger red */
+        }
+
+        .result-box.green {
+          background-color: #28a745; /* Bootstrap success green */
+        }
+
+        /* History list */
+
+        .history-list {
+          list-style: disc inside;
+          margin-top: 15px;
+          line-height: 1.6;
+          font-size: 1.1rem;
+          color: #444;
+        }
+
+        /* Buttons */
+
+        .btn-back,
+        .btn-history {
+          display: inline-block;
+          margin: 10px 15px 0 0;
+          padding: 10px 20px;
+          background-color: #1e90ff;
+          color: white;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover,
+        .btn-history:hover {
+          background-color: #004ea1;
+        }
+
+         .login-register-box {
+          max-width: 400px;
+          margin: 60px auto;
+          padding: 30px;
+          border-radius: 12px;
+          background: #fff;
+          box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .login-register-box h2 {
+          text-align: center;
+          margin-bottom: 25px;
+          color: #333;
+        }
+
+        .login-register-box form button {
+          background-color: #1e90ff;
+          color: #fff;
+          border: none;
+          padding: 12px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          width: 100%;
+          margin-top: 15px;
+        }
+
+        .login-register-box form button:hover {
+          background-color: #004ea1;
+        }
+
+        .login-register-box a {
+          color: #1e90ff;
+          text-decoration: none;
+        }
+
+        /* Background images by page */
+
+        body.index {
+          background: url('../images/medical.jpg') no-repeat center center fixed;
+          background-size: cover;
+        }
+
+        body.predict_diabetes {
+          background: url('../images/newn.jpg') no-repeat center center fixed;
+          background-size: cover;
+        }
+
+        body.predict_heart {
+          background: url('../images/heart_bg.jpg') no-repeat center center fixed;
+          background-size: cover;
+        }
+
+        body.predict_kidney {
+          background: url('../images/kidney.jpg') no-repeat center center fixed;
+          background-size: cover;
+        }
+
+        body.predict_liver {
+          background: url('../images/med.jpg') no-repeat center center fixed;
+          background-size: cover;
+        }
+    </style>
+
 </head>
 <body class="index">
 
